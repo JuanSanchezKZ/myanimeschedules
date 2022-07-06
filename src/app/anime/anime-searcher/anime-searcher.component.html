@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="container">
+    <div class="col d-flex justify-content-center"><h1>Summer 2022</h1></div>
+  </div>
+  <input
+    type="text"
+    style="padding: 8px; margin: 15px auto; width: 50%"
+    placeholder="Type to filter the name column..."
+    autofocus
+    (keyup)="updateFilter($event)"
+  />
+
+  <ngx-datatable
+    class="dark"
+    [rows]="rows"
+    [columns]="columns"
+    [headerHeight]="70"
+    [footerHeight]="70"
+    rowHeight="auto"
+    [count]="count"
+    [externalPaging]="true"
+    [offset]="offset"
+    [limit]="pageSize"
+    (page)="setPage($event)"
+    [columnMode]="columnMode"
+  >
+  </ngx-datatable>
+</div>
+
+<ng-template #template let-row="row"
+  ><img class="img_datatable" [src]="row.images.jpg.image_url" alt=""
+/></ng-template>
+
+<ng-template #add let-row="row"
+  ><div class="d-grid gap-2">
+    <button
+      type="button"
+      class="btn btn-dark btn_datatable"
+      (click)="onActivate(row)"
+    >
+      Detail
+    </button>
+  </div></ng-template
+>
+
+<ng-template #templat let-row="row">
+  <div *ngFor="let i of rowsModal" class="container modal__style">
+    <button
+      (click)="modalRef?.hide()"
+      type="button"
+      class="btn-close btn-close-white btn-exit"
+      aria-label="Close"
+    ></button>
+    <div class="col">
+      <p class="p_title">{{ i.title }}</p>
+    </div>
+    <div class="row">
+      <div class="col">
+        <img class="img_modal" [src]="i.images.jpg.image_url" alt="" />
+      </div>
+      <div class="col">
+        <div class="container_synopsis" [class.show]="show">
+          {{ i.synopsis }}
+        </div>
+        <a class="btn-show" (click)="show = !show">
+          {{ show ? "Show less" : "Show More" }}
+        </a>
+      </div>
+    </div>
+    <div class="col">
+      <p>Next episode in: {{ demo }}</p>
+    </div>
+
+    <div class="container_modal">
+      <div *ngFor="let i of rowsModal" class="item">
+        <button
+          type="button"
+          class="btn btn-dark btn-schedule"
+          (click)="passToSchedule(i.row.broadcast)"
+        >
+          Add to Schedule
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- let i of getAnime.animeSeasonal | filter: searchText | paginate: { itemsPerPage:
+10, currentPage: queryPage }
+
+<img style="max-width: 100px" [src]="i.images.jpg.image_url" alt="" />
+<div *ngFor="let e of i.genres">
+  <td>{{ e.name }}</td>
+  <td>{{ i.title }}</td>
+  <td>{{ i.score }}</td>
+</div> -->

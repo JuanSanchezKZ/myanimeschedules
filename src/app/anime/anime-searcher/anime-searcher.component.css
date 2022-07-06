@@ -1,0 +1,79 @@
+h1 {
+  color: #fff;
+  font-weight: 800;
+  margin-top: 40px;
+}
+
+.modal__style {
+  background-color: #181b24;
+  color: white;
+}
+
+p {
+  margin: 20px 0;
+}
+
+.p_title {
+  text-align: center;
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+}
+
+.btn_datatable {
+  margin-top: 40px;
+}
+
+@media only screen and (max-width: 400px) {
+  .btn_datatable {
+    margin-top: 15px;
+    width: 55px;
+    height: 35px;
+    font-size: 15px;
+    text-align: center;
+  }
+}
+
+.item {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.img_datatable {
+  max-width: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  .img_datatable {
+    max-width: 70px;
+  }
+}
+
+.btn-schedule {
+  width: 150px;
+}
+
+.btn-exit {
+  position: absolute;
+  right: 0px;
+}
+
+.container_modal {
+  display: flex;
+  justify-content: center;
+}
+
+.container_synopsis {
+  font-size: 16px;
+  line-height: 16px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.show {
+  overflow: visible;
+  height: auto;
+}
+
+.btn-show {
+  color: #fff;
+}
