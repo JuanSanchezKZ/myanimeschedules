@@ -71,7 +71,7 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-    
+
     // const ids = this.rows.map((obj) => obj.mal_id);
     // console.log(ids);
 
@@ -90,6 +90,7 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   onActivate(event: any) {
     if (!this.rowsModal.length) {
       this.rowsModal.push(event);
+      console.log(this.rowsModal);
       this.updateNextEpisode(event);
       this.openModal(this.modal);
     } else {
@@ -178,15 +179,18 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
 
   passToSchedule(broadcast: any) {
     const schedules = this.storage.getSchedules();
-    console.log(broadcast);
-    schedules.push(broadcast);
-
-    this.storage.saveSchedule(schedules);
+    if (schedules.some((e: any) => e.mal_id == broadcast.mal_id)) {
+      console.log('ya etaba en la lista lobo');
+    } else {
+      schedules.push(broadcast);
+      console.log(schedules, 'agregado perro');
+      this.storage.saveSchedule(schedules);
+    }
   }
 
   ngOnInit(): void {
     this.getAnime.getSeasonalAnime('2022', 'summer', this.offset);
-    console.log(Object.keys(this.rowsModal).length);
+
     setTimeout(() => (this.rows = [...this.getAnime.animeSeasonal]), 300);
 
     setInterval(() => (this.count = this.getAnime.total), 300);

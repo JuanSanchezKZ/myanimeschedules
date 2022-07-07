@@ -1,62 +1,139 @@
-<table>
-  <thead>
-    <tr>
-      <th>Time</th>
-      <th>Monday</th>
-      <th>Tuesday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Saturday</th>
-      <th>Sunday</th>
-    </tr>
-  </thead>
-  <tbody>
-    <div *ngFor="let i of schedules">
-      <tr>
-        <td>{{ i.time }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>{{ i.time }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>{{ i.time }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td>{{ i.time }}</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </div>
-  </tbody>
-</table>
+<div class="container">
+  <h1>Your Schedule</h1>
 
-<button class="btn btn-primary" (click)="clearSchedule()">
-  Clear Schedule
-</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Monday</th>
+        <th scope="col">Tuesday</th>
+        <th scope="col">Wednesday</th>
+        <th scope="col">Thursday</th>
+        <th scope="col">Friday</th>
+        <th scope="col">Saturday</th>
+        <th scope="col">Sunday</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let i of schedules">
+      <tr [ngSwitch]="i.broadcast.day">
+        <th scope="row">{{ i.broadcast.time }} JST</th>
+        <td>
+          <div *ngSwitchCase="'Mondays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngSwitchCase="'Tuesdays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngSwitchCase="'Wednesdays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngSwitchCase="'Thursdays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngSwitchCase="'Fridays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngSwitchCase="'Saturdays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div *ngSwitchCase="'Sundays'">
+            <div class="td__schedule">
+              <div class="td__title">
+                {{ i.title }}
+              </div>
+              <div class="td__img">
+                <img
+                  style="max-width: 100px"
+                  [src]="i.images.jpg.image_url"
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-primary" (click)="clearSchedule()">
+    Clear Schedule
+  </button>
+</div>

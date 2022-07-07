@@ -5,7 +5,7 @@ import { JikanService } from './jikan.service';
   providedIn: 'root',
 })
 export class GetAnimeService implements OnInit {
-  animeSeasonal: any[] = [];
+  animeSeasonal: any;
   id: any = '';
   data: any;
   total: number = 0;
