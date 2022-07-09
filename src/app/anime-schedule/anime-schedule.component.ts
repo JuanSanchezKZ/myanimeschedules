@@ -13,7 +13,7 @@ export class AnimeScheduleComponent implements OnInit {
   newAnime1: any;
   modalRef?: BsModalRef;
   animeMondays: any[] = [];
-
+  modal: any;
   constructor(
     private storage: StorageService,
     private getAnime: GetAnimeService,
@@ -38,9 +38,9 @@ export class AnimeScheduleComponent implements OnInit {
     this.storage.clearSchedules();
   }
 
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<any>, schedules: any) {
     this.modalRef = this.modalService.show(template);
-
+    this.modal = schedules;
     // const ids = this.rows.map((obj) => obj.mal_id);
     // console.log(ids);
 

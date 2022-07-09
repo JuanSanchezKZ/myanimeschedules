@@ -72,5 +72,21 @@ span {
 /* modal */
 
 .modal__schedule {
+  color: white;
   background-color: #161a1d;
+}
+
+.modal__title {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.modal__synopsis {
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem;
+}
+
+.modal__synopsis_syn {
+  padding: 0.5rem;
 }
