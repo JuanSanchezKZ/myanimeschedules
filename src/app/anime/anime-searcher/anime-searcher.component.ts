@@ -180,10 +180,10 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   passToSchedule(broadcast: any) {
     const schedules = this.storage.getSchedules();
     if (schedules.some((e: any) => e.mal_id == broadcast.mal_id)) {
-      console.log('ya etaba en la lista lobo');
+      console.log('ya etaba en la lista');
     } else {
       schedules.push(broadcast);
-      console.log(schedules, 'agregado perro');
+      console.log(schedules, 'agregado');
       this.storage.saveSchedule(schedules);
     }
   }

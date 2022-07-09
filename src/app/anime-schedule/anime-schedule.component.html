@@ -1,10 +1,8 @@
-<div class="container">
-  <h1>Your Schedule</h1>
-
-  <table class="table">
+<h1>Your Schedule</h1>
+<div class="table-responsive-sm">
+  <table class="table" id="table">
     <thead>
       <tr>
-        <th scope="col">Time</th>
         <th scope="col">Monday</th>
         <th scope="col">Tuesday</th>
         <th scope="col">Wednesday</th>
@@ -16,19 +14,21 @@
     </thead>
     <tbody *ngFor="let i of schedules">
       <tr [ngSwitch]="i.broadcast.day">
-        <th scope="row">{{ i.broadcast.time }} JST</th>
         <td>
           <div *ngSwitchCase="'Mondays'">
-            <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
+            <div class="td__schedule" (click)="openModal(template)">
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -36,15 +36,18 @@
         <td>
           <div *ngSwitchCase="'Tuesdays'">
             <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -52,15 +55,18 @@
         <td>
           <div *ngSwitchCase="'Wednesdays'">
             <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -68,15 +74,18 @@
         <td>
           <div *ngSwitchCase="'Thursdays'">
             <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -84,15 +93,18 @@
         <td>
           <div *ngSwitchCase="'Fridays'">
             <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -100,15 +112,18 @@
         <td>
           <div *ngSwitchCase="'Saturdays'">
             <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -116,15 +131,18 @@
         <td>
           <div *ngSwitchCase="'Sundays'">
             <div class="td__schedule">
-              <div class="td__title">
-                {{ i.title }}
-              </div>
               <div class="td__img">
                 <img
-                  style="max-width: 100px"
+                  style="max-width: 70px"
                   [src]="i.images.jpg.image_url"
                   alt=""
                 />
+              </div>
+              <div class="col">
+                <div class="td__title">
+                  <span> {{ i.title }}</span>
+                </div>
+                <div class="td__time">{{ i.broadcast.time }} JST</div>
               </div>
             </div>
           </div>
@@ -132,8 +150,21 @@
       </tr>
     </tbody>
   </table>
-
-  <button class="btn btn-primary" (click)="clearSchedule()">
-    Clear Schedule
-  </button>
 </div>
+
+<button class="btn btn-primary mt-3" (click)="clearSchedule()">
+  Clear Schedule
+</button>
+
+<ng-template #template>
+  <div class="modal__schedule">
+    <div class="modal-header">
+      <button
+        type="button"
+        class="btn-close close pull-right"
+        aria-label="Close"
+        (click)="modalRef?.hide()"
+      ></button>
+    </div>
+  </div>
+</ng-template>
