@@ -24,6 +24,6 @@ export class FormSearchIdComponent implements OnInit {
   ngOnInit(): void {}
 
   onClickSubmit(data: any) {
-    this.getAnime.getSeasonalAnime(data.year, data.season, 0);
+    // this.getAnime.getSeasonalAnime(data.year, data.season, 0);
   }
 }

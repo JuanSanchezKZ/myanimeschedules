@@ -21,6 +21,7 @@ import { ModalComponent } from './modal/modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
 import { AnimeHomeComponent } from './anime-home/anime-home.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { AnimeHomeComponent } from './anime-home/anime-home.component';
     AppRoutingModule,
     ModalModule.forRoot(),
     DayPilotModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

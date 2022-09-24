@@ -2,9 +2,7 @@ import {
   AfterViewInit,
   Component,
   DoCheck,
-  OnChanges,
   OnInit,
-  SimpleChanges,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
@@ -14,6 +12,7 @@ import { ColumnMode } from '@swimlane/ngx-datatable';
 import { StorageService } from './storage.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { JikanService } from 'src/app/jikan.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-anime-searcher',
@@ -56,31 +55,36 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
 
   @ViewChild('templat', { static: true })
   modal: any;
+  displayedColumns: string[] = [
+    'image',
+    'name',
+    'status',
+    'broadcast',
+    'airing',
+    'malLink',
+    'add',
+  ];
+  dataSource = new MatTableDataSource<any>();
 
   constructor(
     public getAnime: GetAnimeService,
     private storage: StorageService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private api: JikanService
   ) {}
 
   setPage(pageInfo: any) {
     this.offset = pageInfo.offset;
-    setTimeout(() => (this.rows = [...this.getAnime.animeSeasonal]), 300);
-    this.getAnime.getSeasonalAnime('2022', 'summer', this.offset);
+    this.api.getSeasonalAnime('2022', 'fall', this.offset).subscribe((data) => {
+      this.rows = data.data;
+
+      // this.count = data.pagination.items.total;
+      // this.pageSize = data.pagination.items.per_page;
+    });
   }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
-
-    // const ids = this.rows.map((obj) => obj.mal_id);
-    // console.log(ids);
-
-    // ids.forEach((element: any) => {
-    //   this.getAnime.getAnimeDetailById(element);
-    // });
-
-    // setTimeout(() => (this.rowsModal = [this.getAnime.animeById]), 300);
-    // console.log(this.rowsModal);
   }
 
   onSelect({ selected }: { selected: any }) {
@@ -88,17 +92,12 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   }
 
   onActivate(event: any) {
-    if (!this.rowsModal.length) {
-      this.rowsModal.push(event);
-      console.log(this.rowsModal);
-      this.updateNextEpisode(event);
-      this.openModal(this.modal);
-    } else {
+    if (this.rowsModal.length) {
       this.rowsModal = [];
-      this.rowsModal.push(event);
-      this.openModal(this.modal);
-      this.updateNextEpisode(event);
     }
+    this.rowsModal.push(event);
+    this.openModal(this.modal);
+    this.updateNextEpisode(event);
   }
 
   updateNextEpisode(event: any) {
@@ -130,7 +129,7 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
       this.demo = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
       if (this.demo.includes('-')) {
         this.countDownDate = this.countDownDate + 6.048e8;
-        this.countdown;
+        this.countdown();
       }
     }, 100);
   }
@@ -151,8 +150,6 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   }
 
   updateFilter(event: any) {
-    this.rows = [...this.getAnime.animeSeasonal];
-
     let val = event.target.value;
 
     // filter our data
@@ -166,6 +163,10 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
 
     // Whenever the filter changes, always go back to the first page
     this.offset = 0;
+  }
+
+  updateTable() {
+    this.dataSource.data = this.rows;
   }
 
   convertToJapan(date: any) {
@@ -189,26 +190,13 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.getAnime.getSeasonalAnime('2022', 'summer', this.offset);
-
-    setTimeout(() => (this.rows = [...this.getAnime.animeSeasonal]), 300);
-
-    setInterval(() => (this.count = this.getAnime.total), 300);
-    setInterval(() => (this.pageSize = this.getAnime.perPage), 300);
-
-    this.columns = [
-      {
-        prop: 'images.jpg.image_url',
-        name: 'Image',
-        cellTemplate: this.child,
-        sortable: false,
-      },
-      { prop: 'title', name: 'Title' },
-
-      { prop: 'broadcast.string', name: 'Broadcast' },
-      { prop: 'aired.string', name: 'Airing' },
-      { prop: 'null', name: '', cellTemplate: this.add, sortable: false },
-    ];
+    this.api.getSeasonalAnime('2022', 'fall', this.offset).subscribe((data) => {
+      this.rows = data.data;
+      this.count = data.pagination.items.total;
+      this.pageSize = data.pagination.items.per_page;
+      console.log(this.rows);
+      this.updateTable();
+    });
   }
 
   ngDoCheck(): void {}

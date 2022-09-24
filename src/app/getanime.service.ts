@@ -40,15 +40,6 @@ export class GetAnimeService implements OnInit {
     });
   }
 
-  getSeasonalAnime(year: any, season: any, page: any = 0) {
-    this.jikan.getSeasonalAnime(year, season, page + 1).subscribe((data) => {
-      this.animeSeasonal = data.data;
-      this.total = data.pagination.items.total;
-      this.perPage = data.pagination.items.per_page;
-      console.log(this.animeSeasonal);
-    });
-  }
-
   getSearchAnime(q: any, page: any) {
     this.jikan.getSearchAnime(q, page + 1).subscribe((data) => {
       this.total = data.pagination.items.total;
