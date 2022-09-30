@@ -1,158 +1,161 @@
-<div class="container">
-  <h1>Your Schedule</h1>
-  <div class="table-responsive-sm">
-    <table class="table" id="table">
-      <thead>
-        <tr>
-          <th scope="col">Monday</th>
-          <th scope="col">Tuesday</th>
-          <th scope="col">Wednesday</th>
-          <th scope="col">Thursday</th>
-          <th scope="col">Friday</th>
-          <th scope="col">Saturday</th>
-          <th scope="col">Sunday</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let i of schedules">
-        <tr [ngSwitch]="i.broadcast.day">
-          <td>
-            <div *ngSwitchCase="'Mondays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div *ngSwitchCase="'Tuesdays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div *ngSwitchCase="'Wednesdays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div *ngSwitchCase="'Thursdays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div *ngSwitchCase="'Fridays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div *ngSwitchCase="'Saturdays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-          <td>
-            <div *ngSwitchCase="'Sundays'">
-              <div class="td__schedule" (click)="openModal(template, i)">
-                <div class="td__img">
-                  <img
-                    style="max-width: 50px"
-                    [src]="i.images.jpg.image_url"
-                    alt=""
-                  />
-                </div>
-                <div class="col">
-                  <div class="td__time">{{ i.broadcast.time }} JST</div>
-                  <div class="td__title">
-                    <span> {{ i.title }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+<table mat-table [dataSource]="dataSource">
+  <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Name Column -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="Mondays">
+    <th mat-header-cell *matHeaderCellDef>Monday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Mondays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="Tuesdays">
+    <th mat-header-cell *matHeaderCellDef>Tuesday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Tuesdays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Wednesdays">
+    <th mat-header-cell *matHeaderCellDef>Wednesday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Wednesdays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Thursdays">
+    <th mat-header-cell *matHeaderCellDef>Thursday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Thursdays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Fridays">
+    <th mat-header-cell *matHeaderCellDef>Friday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Fridays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Saturdays">
+    <th mat-header-cell *matHeaderCellDef>Saturday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Saturdays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Sundays">
+    <th mat-header-cell *matHeaderCellDef>Sunday</th>
+    <td mat-cell *matCellDef="let i">
+      <div
+        *ngIf="i.broadcast.day == 'Sundays'"
+        class="td__schedule"
+        (click)="openModal(template, i)"
+      >
+        <div class="td__img">
+          <img style="max-width: 50px" [src]="i.images.jpg.image_url" alt="" />
+        </div>
+        <div class="col">
+          <div class="td__time">{{ i.broadcast.time }} JST</div>
+          <div class="td__title">
+            <span> {{ i.title }}</span>
+          </div>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
 
 <button class="btn btn-primary mt-3" (click)="clearSchedule()">
   Clear Schedule

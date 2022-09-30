@@ -19,6 +19,9 @@ export class StorageService {
     }
   }
 
+  deleteSchedules() {
+    // const jsonSchedules = localStorage.removeItem();
+  }
   clearSchedules() {
     localStorage.clear();
   }

@@ -1,14 +1,27 @@
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button
-      type="button"
-      class="btn-close close pull-right"
-      aria-label="Close"
-      (click)="modalRef?.hide()"
-    >
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
+<div mat-dialog-content class="container modal__style">
+  <button
+    type="button"
+    class="btn-close btn-close-white btn-exit"
+    aria-label="Close"
+  ></button>
+  <div class="col">
+    <p class="p_title">{{ data.title }}</p>
   </div>
-  <div class="modal-body">This is a modal.</div>
-</ng-template>
+  <div class="row">
+    <div class="col">
+      <img class="img_modal" [src]="data.image" alt="" />
+    </div>
+    <div class="col">
+      <div class="container_synopsis" [class.show]="show">
+        {{ data.synopsis }}
+      </div>
+      <a class="btn-show" (click)="show = !show">
+        {{ show ? "Show less" : "Show More" }}
+      </a>
+    </div>
+  </div>
+  <div class="col">
+    <p>Next episode in: {{ demo }}</p>
+  </div>
+  <button (click)="passToSchedule(data.storage)">Add to Schedule</button>
+</div>

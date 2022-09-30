@@ -20,8 +20,16 @@ import { SearchAnimeComponent } from './search-anime/search-anime.component';
 import { ModalComponent } from './modal/modal.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DayPilotModule } from '@daypilot/daypilot-lite-angular';
-import { AnimeHomeComponent } from './anime-home/anime-home.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { ROOT_REDUCERS } from 'src/store/app.state';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appReducer } from 'src/store/reducers/reducers';
 
 @NgModule({
   declarations: [
@@ -34,7 +42,6 @@ import { MatTableModule } from '@angular/material/table';
     AnimeNavbarComponent,
     SearchAnimeComponent,
     ModalComponent,
-    AnimeHomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +56,10 @@ import { MatTableModule } from '@angular/material/table';
     ModalModule.forRoot(),
     DayPilotModule,
     MatTableModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    StoreModule.forRoot(ROOT_REDUCERS),
+    StoreDevtoolsModule.instrument({ name: 'TEST' }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,6 +7,42 @@ h1 {
   font-weight: 800;
   margin-top: 40px;
 }
+input {
+  color: black;
+}
+
+table {
+  background: linear-gradient(180deg, #1b2833, #14171a);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+  border-radius: 8px;
+  width: 100%;
+}
+
+td {
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+}
+
+th {
+  text-align: center;
+  font-size: 1rem;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #21262b;
+  border: 1px solid #14171a;
+  color: white;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
+
+.cell {
+  padding: 1rem;
+}
 
 .modal__style {
   background-color: #181b24;

@@ -1,143 +1,90 @@
+<app-anime-schedule></app-anime-schedule>
+
 <div class="container">
   <div class="container">
     <div class="col d-flex justify-content-center"><h1>Fall 2022</h1></div>
   </div>
   <input
+    #searchInput
     type="text"
     style="padding: 8px; margin: 15px auto; width: 50%"
     placeholder="Type to filter the name column..."
-    autofocus
-    (keyup)="updateFilter($event)"
   />
 </div>
 
-<div class="container">
-  <table mat-table [dataSource]="dataSource">
-    <!--- Note that these columns can be defined in any order.
+<table mat-table [dataSource]="dataSource">
+  <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Name Column -->
+  <!-- Name Column -->
 
-    <!-- Position Column -->
-    <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef>Image</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell"><img [src]="i.images.jpg.image_url" alt="" /></div>
-      </td>
-    </ng-container>
+  <!-- Position Column -->
+  <ng-container matColumnDef="image">
+    <th mat-header-cell *matHeaderCellDef>Image</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell"><img [src]="i.images.jpg.image_url" alt="" /></div>
+    </td>
+  </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell">{{ i.title }}</div>
-      </td>
-    </ng-container>
+  <!-- Weight Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell">{{ i.title }}</div>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell">{{ i.status }}</div>
-      </td>
-    </ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell">{{ i.status }}</div>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="broadcast">
-      <th mat-header-cell *matHeaderCellDef>Broadcast</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell">{{ i.broadcast.string }}</div>
-      </td>
-    </ng-container>
+  <ng-container matColumnDef="broadcast">
+    <th mat-header-cell *matHeaderCellDef>Broadcast</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell">{{ i.broadcast.string }}</div>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="airing">
-      <th mat-header-cell *matHeaderCellDef>Airing</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell">{{ i.aired.string }}</div>
-      </td>
-    </ng-container>
+  <ng-container matColumnDef="airing">
+    <th mat-header-cell *matHeaderCellDef>Airing</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell">{{ i.aired.string }}</div>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="malLink">
-      <th mat-header-cell *matHeaderCellDef>Link</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell"><a [href]="i.url">MAL</a></div>
-      </td>
-    </ng-container>
+  <ng-container matColumnDef="malLink">
+    <th mat-header-cell *matHeaderCellDef>Link</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell"><a [href]="i.url">MAL</a></div>
+    </td>
+  </ng-container>
 
-    <ng-container matColumnDef="add">
-      <th mat-header-cell *matHeaderCellDef>Add to Schedule</th>
-      <td mat-cell *matCellDef="let i">
-        <div class="cell">
-          <div #add class="d-grid gap-2">
-            <button
-              type="button"
-              class="btn btn-dark btn_datatable"
-              (click)="onActivate(i)"
-            >
-              Detail
-            </button>
-          </div>
+  <ng-container matColumnDef="add">
+    <th mat-header-cell *matHeaderCellDef>Add to Schedule</th>
+    <td mat-cell *matCellDef="let i">
+      <div class="cell">
+        <div #add class="d-grid gap-2">
+          <button
+            (click)="openDialog(i)"
+            type="button"
+            class="btn btn-dark btn_datatable"
+          >
+            Detail
+          </button>
         </div>
-      </td>
-    </ng-container>
+      </div>
+    </td>
+  </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
-</div>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
 
 <ng-template #template let-row="row"
   ><img class="img_datatable" [src]="row.images.jpg.image_url" alt=""
 /></ng-template>
 
 >
-
-<ng-template #templat let-row="row">
-  <div *ngFor="let i of rowsModal" class="container modal__style">
-    <button
-      (click)="modalRef?.hide()"
-      type="button"
-      class="btn-close btn-close-white btn-exit"
-      aria-label="Close"
-    ></button>
-    <div class="col">
-      <p class="p_title">{{ i.title }}</p>
-    </div>
-    <div class="row">
-      <div class="col">
-        <img class="img_modal" [src]="i.images.jpg.image_url" alt="" />
-      </div>
-      <div class="col">
-        <div class="container_synopsis" [class.show]="show">
-          {{ i.synopsis }}
-        </div>
-        <a class="btn-show" (click)="show = !show">
-          {{ show ? "Show less" : "Show More" }}
-        </a>
-      </div>
-    </div>
-    <div class="col">
-      <p>Next episode in: {{ demo }}</p>
-    </div>
-
-    <div class="container_modal">
-      <div *ngFor="let i of rowsModal" class="item">
-        <button
-          type="button"
-          class="btn btn-dark btn-schedule"
-          (click)="passToSchedule(i)"
-        >
-          Add to Schedule
-        </button>
-      </div>
-    </div>
-  </div>
-</ng-template>
-
-<!-- let i of getAnime.animeSeasonal | filter: searchText | paginate: { itemsPerPage:
-10, currentPage: queryPage }
-
-<img style="max-width: 100px" [src]="i.images.jpg.image_url" alt="" />
-<div *ngFor="let e of i.genres">
-  <td>{{ e.name }}</td>
-  <td>{{ i.title }}</td>
-  <td>{{ i.score }}</td>
-</div> -->

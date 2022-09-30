@@ -8,10 +8,7 @@ table {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   border-radius: 8px;
-}
-
-.table {
-  border-color: transparent !important;
+  width: 100%;
 }
 
 td {
@@ -29,6 +26,10 @@ th {
   background-color: #21262b;
   border: 1px solid #14171a;
   color: white;
+}
+
+th.mat-header-cell {
+  text-align: center;
 }
 
 h1 {

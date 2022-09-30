@@ -23,7 +23,7 @@ export class JikanService {
 
   getSearchAnime(q: string, page: any): Observable<any> {
     return this.http.get<any>(
-      `https://api.jikan.moe/v4/anime?q="${q}"&page=${page}&limit=10`
+      `https://api.jikan.moe/v4/anime?page=${page}&limit=10&letter=${q}&start_date=2022&status=upcoming`
     );
   }
 
