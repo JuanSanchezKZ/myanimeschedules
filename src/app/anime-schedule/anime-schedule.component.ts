@@ -63,12 +63,19 @@ export class AnimeScheduleComponent implements OnInit {
     this.modal = schedules;
   }
 
-  removeSchedule(id: number) {
+  removeSchedule(query: string) {
+    console.log(query);
     this.http
-      .delete(`http://127.0.0.1:8000/api/feed/${id}/`)
-      .subscribe((data) => console.log(data));
-    this.schedules = this.schedules.filter((a) => a.id !== id);
-    this.updateTable();
+      .get(`http://127.0.0.1:8000/api/feed/?search=${query}`)
+      .subscribe((resp: any) => {
+        this.http
+          .delete(`http://127.0.0.1:8000/api/feed/${resp[0].id}/`)
+          .subscribe((data) => console.log(data));
+        this.schedules = this.schedules.filter(
+          (a) => a.title !== resp[0].metadata.title
+        );
+        this.updateTable();
+      });
   }
 
   ngOnInit(): void {
