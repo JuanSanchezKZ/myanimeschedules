@@ -4,12 +4,11 @@ import {
   DoCheck,
   ElementRef,
   OnInit,
-  TemplateRef,
   ViewChild,
 } from '@angular/core';
 
-import { StorageService } from './storage.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { MatPaginator } from '@angular/material/paginator';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { JikanService } from 'src/app/jikan.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, fromEvent, map } from 'rxjs';
@@ -38,7 +37,7 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   child: any;
   @ViewChild('add', { static: true })
   add: any;
-
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('searchInput', { static: true })
   searchInput!: ElementRef;
   displayedColumns: string[] = [
@@ -79,9 +78,6 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
     this.offset = pageInfo.offset;
     this.api.getSeasonalAnime('2022', 'fall', this.offset).subscribe((data) => {
       this.rows = data.data;
-
-      // this.count = data.pagination.items.total;
-      // this.pageSize = data.pagination.items.per_page;
     });
   }
 
@@ -100,6 +96,7 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
 
   updateTable() {
     this.dataSource.data = this.rows;
+    this.dataSource.paginator = this.paginator;
   }
 
   fillTable() {
@@ -115,6 +112,7 @@ export class AnimeSearcherComponent implements OnInit, DoCheck, AfterViewInit {
   ngOnInit(): void {
     this.search();
     this.fillTable();
+    
   }
 
   ngDoCheck(): void {}

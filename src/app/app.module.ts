@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormSearchIdComponent } from './form-search-id/form-search-id.component';
+
 import { AnimeDetailComponent } from './anime/anime-detail/anime-detail.component';
 import { AnimeSeasonListComponent } from './anime/anime-season-list/anime-season-list.component';
 
@@ -29,12 +29,12 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { ROOT_REDUCERS } from 'src/store/app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { appReducer } from 'src/store/reducers/reducers';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AnimeLoginComponent } from './anime-login/anime-login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormSearchIdComponent,
     AnimeDetailComponent,
     AnimeSeasonListComponent,
     AnimeSearcherComponent,
@@ -42,6 +42,7 @@ import { appReducer } from 'src/store/reducers/reducers';
     AnimeNavbarComponent,
     SearchAnimeComponent,
     ModalComponent,
+    AnimeLoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +58,7 @@ import { appReducer } from 'src/store/reducers/reducers';
     DayPilotModule,
     MatTableModule,
     MatDialogModule,
+    MatPaginatorModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),

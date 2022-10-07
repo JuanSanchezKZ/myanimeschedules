@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormSearchIdComponent } from './form-search-id.component';
+import { AnimeLoginComponent } from './anime-login.component';
 
-describe('FormSearchIdComponent', () => {
-  let component: FormSearchIdComponent;
-  let fixture: ComponentFixture<FormSearchIdComponent>;
+describe('AnimeLoginComponent', () => {
+  let component: AnimeLoginComponent;
+  let fixture: ComponentFixture<AnimeLoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormSearchIdComponent ]
+      declarations: [ AnimeLoginComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FormSearchIdComponent);
+    fixture = TestBed.createComponent(AnimeLoginComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

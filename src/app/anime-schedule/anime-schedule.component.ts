@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app.state';
 import { selectAppFeature } from 'src/store/selectors/selector';
 import { distinct, distinctUntilChanged, filter, skip } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-anime-schedule',
@@ -33,7 +34,8 @@ export class AnimeScheduleComponent implements OnInit {
   constructor(
     private storage: StorageService,
     private modalService: BsModalService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private http: HttpClient
   ) {}
 
   // find anime by id in list of schedule anime
@@ -61,9 +63,23 @@ export class AnimeScheduleComponent implements OnInit {
     this.modal = schedules;
   }
 
-  ngOnInit(): void {
-    this.schedules = this.storage.getSchedules();
+  removeSchedule(id: number) {
+    this.http
+      .delete(`http://127.0.0.1:8000/api/feed/${id}/`)
+      .subscribe((data) => console.log(data));
+    this.schedules = this.schedules.filter((a) => a.id !== id);
     this.updateTable();
+  }
+
+  ngOnInit(): void {
+    this.http.get('http://127.0.0.1:8000/api/feed/').subscribe((resp: any) => {
+      for (let i of resp) {
+        this.schedules.push(i.metadata);
+      }
+
+      this.updateTable();
+    });
+
     this.store
       .select(selectAppFeature)
       .pipe(
@@ -76,10 +92,3 @@ export class AnimeScheduleComponent implements OnInit {
       });
   }
 }
-
-// hola: any = {
-//   time: '9:00',
-//   monday: { name: 'Naruto' },
-//   tuesday: null,
-//   friday: { name: 'One Piece' },
-// };

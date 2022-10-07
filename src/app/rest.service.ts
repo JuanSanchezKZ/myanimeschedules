@@ -11,15 +11,15 @@ const endpoint = 'http://localhost:4200/api/v1/';
 export class RestService {
   constructor(private http: HttpClient) {}
 
-  getData() {
-    return this.http.get(apiUrl);
-  }
+  // getData() {
+  //   return this.http.get(apiUrl);
+  // }
 
-  getnewData(): Observable<any> {
-    return this.http.get('https://api.jikan.moe/v4/anime');
-  }
+  // getnewData(): Observable<any> {
+  //   return this.http.get('https://api.jikan.moe/v4/anime');
+  // }
 
-  getTopAnime(): Observable<any> {
-    return this.http.get('https://api.jikan.moe/v3/top/anime/1');
-  }
+  // getTopAnime(): Observable<any> {
+  //   return this.http.get('https://api.jikan.moe/v3/top/anime/1');
+  // }
 }
