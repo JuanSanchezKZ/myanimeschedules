@@ -47,12 +47,6 @@ export class AnimeScheduleComponent implements OnInit {
     });
   }
 
-  clearSchedule() {
-    this.schedules = [];
-    this.storage.clearSchedules();
-    this.updateTable();
-  }
-
   updateTable() {
     this.dataSource.data = this.schedules;
     this.orderScheduleAnime();

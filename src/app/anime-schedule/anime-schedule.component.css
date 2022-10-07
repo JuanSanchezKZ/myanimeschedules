@@ -1,93 +1,27 @@
 * {
-  box-sizing: border-box;
-  font-size: 1.3vh;
+  color: white;
+  font-weight: 600;
+  text-align: center;
 }
 
 table {
-  background: linear-gradient(180deg, #1c2630, #14171a);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  border-radius: 8px;
   width: 100%;
+  background: transparent;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-td {
-  text-align: center;
-  padding: 0.3rem;
-  border: 1px solid rgba(0, 0, 0, 0.24);
+img {
+  width: 100px;
 }
 
 th {
-  text-align: center;
-  font-size: 1rem;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #21262b;
-  border: 1px solid #14171a;
-  color: white;
+  border: 0.5px solid rgba(0, 0, 0, 0.288);
+  background: #0d1831;
 }
 
-th.mat-header-cell {
-  text-align: center;
-}
-
-h1 {
-  text-align: center;
-  font-weight: 800;
-  margin-bottom: 40px;
-  color: #fff;
-  font-size: 3rem;
-}
-
-.td__schedule {
-  display: flex;
-  color: #fff;
-  flex-direction: row;
-}
-
-.td__schedule:hover {
-  cursor: pointer;
-}
-
-.td__title {
-  position: relative;
-}
-
-span {
-  padding: -4rem;
-  left: 2px;
-  width: 100%;
-  color: #fff;
-  position: absolute;
-  overflow: hidden; /* to hide anything that doesn't fit in the containing element. */
-  white-space: nowrap;
-  text-overflow: ellipsis; /* to do what you want. */
-}
-
-.td__title:before {
-  content: "";
-  display: inline-block;
-}
-
-/* modal */
-
-.modal__schedule {
-  color: white;
-  background-color: #161a1d;
-}
-
-.modal__title {
-  font-size: 1rem;
-  padding: 0.5rem;
-}
-
-.modal__synopsis {
-  display: flex;
-  flex-direction: row;
-  margin: 0.5rem;
-}
-
-.modal__synopsis_syn {
-  padding: 0.5rem;
+td {
+  border: 0.5px solid rgba(0, 0, 0, 0.288);
+  background: #0f172a;
 }

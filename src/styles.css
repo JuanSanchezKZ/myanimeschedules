@@ -9,12 +9,6 @@ html {
 }
 
 body {
-  background: #14171a;
-
   font-family: "Lato", sans-serif;
-  font-weight: 600;
-}
-
-.datatable-body-cell {
-  padding: 0.5rem !important;
+  background: #060b1a;
 }

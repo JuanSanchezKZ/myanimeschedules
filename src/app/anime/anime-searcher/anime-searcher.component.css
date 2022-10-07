@@ -1,113 +1,31 @@
 * {
   color: white;
-}
-
-h1 {
-  color: #fff;
-  font-weight: 800;
-  margin-top: 40px;
-}
-input {
-  color: black;
+  font-weight: 600;
+  text-align: center;
 }
 
 table {
-  background: linear-gradient(180deg, #1b2833, #14171a);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  border-radius: 8px;
   width: 100%;
-}
-
-td {
-  text-align: center;
-  padding: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.24);
-}
-
-th {
-  text-align: center;
-  font-size: 1rem;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #21262b;
-  border: 1px solid #14171a;
-  color: white;
-}
-
-.mat-header-cell {
-  text-align: center;
-}
-
-.cell {
-  padding: 1rem;
-}
-
-.modal__style {
-  background-color: #181b24;
-  color: white;
-}
-
-p {
-  margin: 20px 0;
-}
-
-@media only screen and (max-width: 400px) {
-  .btn_datatable {
-    margin-top: 15px;
-    width: 55px;
-    height: 35px;
-    font-size: 15px;
-    text-align: center;
-  }
-}
-
-.item {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.img_datatable {
-  max-width: 100px;
-}
-
-@media only screen and (max-width: 600px) {
-  .img_datatable {
-    max-width: 70px;
-  }
-}
-
-.btn-schedule {
-  width: 150px;
-}
-
-.btn-exit {
-  position: absolute;
-  right: 0px;
-}
-
-.container_modal {
-  display: flex;
-  justify-content: center;
-}
-
-.container_synopsis {
-  font-size: 16px;
-  line-height: 16px;
-  height: 30px;
-  overflow: hidden;
-}
-
-.show {
-  overflow: visible;
-  height: auto;
-}
-
-.btn-show {
-  color: #fff;
+  background: transparent;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 img {
   width: 100px;
+}
+
+th {
+  border: 0.5px solid rgba(0, 0, 0, 0.288);
+  background: #0d1831;
+}
+
+td {
+  border: 0.5px solid rgba(0, 0, 0, 0.288);
+  background: #0f172a;
+}
+
+mat-paginator {
+  background-color: transparent;
 }
