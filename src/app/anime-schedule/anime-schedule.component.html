@@ -10,19 +10,15 @@
       <th mat-header-cell *matHeaderCellDef>Monday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Mondays'"
+          *ngIf="i.day == 'Mondays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -36,19 +32,15 @@
       <th mat-header-cell *matHeaderCellDef>Tuesday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Tuesdays'"
+          *ngIf="i.day == 'Tuesdays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -61,19 +53,15 @@
       <th mat-header-cell *matHeaderCellDef>Wednesday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Wednesdays'"
+          *ngIf="i.day == 'Wednesdays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -86,19 +74,15 @@
       <th mat-header-cell *matHeaderCellDef>Thursday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Thursdays'"
+          *ngIf="i.day == 'Thursdays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -111,19 +95,15 @@
       <th mat-header-cell *matHeaderCellDef>Friday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Fridays'"
+          *ngIf="i.day == 'Fridays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -136,19 +116,15 @@
       <th mat-header-cell *matHeaderCellDef>Saturday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Saturdays'"
+          *ngIf="i.day == 'Saturdays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -161,19 +137,15 @@
       <th mat-header-cell *matHeaderCellDef>Sunday</th>
       <td mat-cell *matCellDef="let i">
         <div
-          *ngIf="i.broadcast.day == 'Sundays'"
+          *ngIf="i.day == 'Sundays'"
           class="td__schedule"
           (click)="openModal(template, i)"
         >
           <div class="td__img">
-            <img
-              style="max-width: 50px"
-              [src]="i.images.jpg.image_url"
-              alt=""
-            />
+            <img style="max-width: 50px" [src]="i.image" alt="" />
           </div>
           <div class="col">
-            <div class="td__time">{{ i.broadcast.time }} JST</div>
+            <div class="td__time">{{ i.broadcastTime }} JST</div>
             <div class="td__title">
               <span> {{ i.title }}</span>
             </div>
@@ -202,7 +174,7 @@
     <div class="row">
       <div>
         <div class="modal__synopsis">
-          <img [src]="modal.images.jpg.image_url" alt="" />
+          <img [src]="modal.image" alt="" />
           <div class="modal__synopsis_syn">{{ modal.synopsis }}</div>
         </div>
       </div>

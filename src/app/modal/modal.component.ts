@@ -7,8 +7,6 @@ import {
   OnInit,
   Inject,
 } from '@angular/core';
-
-import { StorageService } from '../anime/anime-searcher/storage.service';
 import { AppState } from 'src/store/app.state';
 import { Store } from '@ngrx/store';
 
@@ -19,6 +17,7 @@ import {
 } from '@angular/material/dialog';
 import { addScheduleAction } from 'src/store/actions/actions';
 import { HttpClient } from '@angular/common/http';
+import { malInterface } from 'src/store/interfaces/apiInterface';
 
 @Component({
   selector: 'app-modal',
@@ -35,7 +34,6 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<any>,
-    private storage: StorageService,
     private store: Store<AppState>,
     private http: HttpClient,
     @Inject(MAT_DIALOG_DATA)
@@ -89,36 +87,30 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   passToSchedule(broadcast: any) {
+    const broadcastBody: malInterface = {
+      data: '',
+      title: broadcast.title,
+      day: broadcast.broadcast.day,
+      broadcastTime: broadcast.broadcast.time,
+      synopsis: broadcast.synopsis,
+      image: broadcast.images.jpg.image_url,
+    };
     this.http
       .get(`http://127.0.0.1:8000/api/feed/?search=${broadcast.title}`)
       .subscribe((data: any) => {
         console.log(data);
         if (data.length === 0) {
           this.http
-            .post('http://127.0.0.1:8000/api/feed/', {
-              metadata: broadcast,
-              status_text: broadcast.title,
-            })
-            .subscribe((data) => {
-              this.store.dispatch(addScheduleAction(broadcast));
-              console.log(data);
+            .post('http://127.0.0.1:8000/api/feed/', broadcastBody)
+            .subscribe((resp) => {
+              this.store.dispatch(addScheduleAction(broadcastBody));
+              console.log(resp);
             });
         } else {
           console.log('ya estaba en la lista perro');
         }
       });
   }
-
-  // passToSchedule(broadcast: any) {
-  //   this.schedules = this.storage.getSchedules();
-  //   if (this.schedules.some((e: any) => e.mal_id == broadcast.mal_id)) {
-  //     console.log('ya etaba en la lista');
-  //   } else {
-  //     this.schedules.push(broadcast);
-  //     this.store.dispatch(addScheduleAction(broadcast));
-  //     this.storage.saveSchedule(this.schedules, broadcast.mal_id);
-  //   }
-  // }
 
   ngOnChanges(changes: SimpleChanges): void {}
 
