@@ -22,6 +22,7 @@ th {
 }
 
 td {
+  width: 14.2%;
   border: 0.5px solid rgba(0, 0, 0, 0.288);
   background: #0f172a;
 }
@@ -29,4 +30,13 @@ td {
 .modal__title,
 .modal__synopsis_syn {
   color: black;
+}
+
+.td__schedule {
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-header-cell {
+  text-align: center;
 }

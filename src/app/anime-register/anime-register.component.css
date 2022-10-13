@@ -1,0 +1,11 @@
+img {
+  width: 300px;
+}
+
+.container-sm {
+  color: white;
+  background-color: #0f172a;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 8px;
+  padding: 3rem;
+}

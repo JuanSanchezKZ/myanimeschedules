@@ -1,0 +1,49 @@
+* {
+  color: white;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row {
+  margin-top: 2rem;
+  gap: 2rem;
+}
+
+.card-body,
+.card {
+  background: transparent;
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.card-text {
+  font-weight: 400;
+}
+
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  border-radius: 8px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  background-color: #0f172a;
+}
+
+.card:hover {
+  transition: background-color 0.5s linear;
+  background-color: #283b69;
+  cursor: pointer;
+}
+
+a {
+  color: white;
+}
+
+img {
+  margin-top: 1rem;
+}

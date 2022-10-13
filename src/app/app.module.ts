@@ -27,6 +27,8 @@ import { ROOT_REDUCERS } from 'src/store/app.state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AnimeLoginComponent } from './anime-login/anime-login.component';
+import { AnimeRegisterComponent } from './anime-register/anime-register.component';
+import { AnimeCardComponent } from './anime-card/anime-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { AnimeLoginComponent } from './anime-login/anime-login.component';
     SearchAnimeComponent,
     ModalComponent,
     AnimeLoginComponent,
+    AnimeRegisterComponent,
+    AnimeCardComponent,
   ],
   imports: [
     BrowserModule,

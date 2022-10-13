@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div
+      *ngFor="let i of cardData"
+      class="card"
+      style="width: 18rem"
+      (click)="openDialog(i)"
+    >
+      <img [src]="i.images.jpg.image_url" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{ i.title }}</h5>
+        <p class="card-text">
+          {{ i.status }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,3 +12,7 @@ body {
   font-family: "Lato", sans-serif;
   background: #18181b;
 }
+
+.mat-dialog-container {
+  background-color: #0f172a;
+}

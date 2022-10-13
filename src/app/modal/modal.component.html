@@ -1,27 +1,24 @@
 <div mat-dialog-content class="container modal__style">
-  <button
-    type="button"
-    class="btn-close btn-close-white btn-exit"
-    aria-label="Close"
-  ></button>
   <div class="col">
     <p class="p_title">{{ data.title }}</p>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col-md-6">
       <img class="img_modal" [src]="data.image" alt="" />
     </div>
-    <div class="col">
+    <div class="col-md-6">
       <div class="container_synopsis" [class.show]="show">
         {{ data.synopsis }}
       </div>
-      <a class="btn-show" (click)="show = !show">
-        {{ show ? "Show less" : "Show More" }}
-      </a>
     </div>
   </div>
   <div class="col">
     <p>Next episode in: {{ demo }}</p>
   </div>
-  <button (click)="passToSchedule(data.storage)">Add to Schedule</button>
+  <button
+    class="btn btn-round b-level-1 b-type-2"
+    (click)="passToSchedule(data.storage)"
+  >
+    Add to Schedule
+  </button>
 </div>

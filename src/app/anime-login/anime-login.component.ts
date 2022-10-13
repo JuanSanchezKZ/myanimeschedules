@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { apiUrl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-anime-login',
@@ -20,12 +21,12 @@ export class AnimeLoginComponent implements OnInit {
     const password = this.formUser.value.password;
 
     this.http
-      .post('http://127.0.0.1:8000/api/login/', {
+      .post(`${apiUrl}login/`, {
         username: email,
         password: password,
       })
-      .subscribe((data) => {
-        console.log(data);
+      .subscribe((data: any) => {
+        localStorage.setItem('userToken', data.token);
       });
   }
 

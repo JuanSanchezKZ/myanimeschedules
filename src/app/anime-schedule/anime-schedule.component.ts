@@ -7,7 +7,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app.state';
 import { selectAppFeature } from 'src/store/selectors/selector';
 import { distinct, distinctUntilChanged, filter, skip } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { apiUrl } from 'src/environments/environment';
 
 @Component({
   selector: 'app-anime-schedule',
@@ -29,6 +30,12 @@ export class AnimeScheduleComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<any>();
   schedules: any[] = [];
+  headers = {
+    headers: new HttpHeaders().set(
+      'Authorization',
+      `Token ${localStorage.getItem('userToken')}`
+    ),
+  };
 
   constructor(
     private modalService: BsModalService,
@@ -56,33 +63,28 @@ export class AnimeScheduleComponent implements OnInit {
     this.modal = schedules;
   }
 
-  removeSchedule(query: string) {
-    console.log(query);
+  removeSchedule(query: number, title: string) {
     this.http
-      .get(`http://127.0.0.1:8000/api/feed/?search=${query}`)
-      .subscribe((resp: any) => {
-        this.http
-          .delete(`http://127.0.0.1:8000/api/feed/${resp[0].id}/`)
-          .subscribe((data) => console.log(data));
-        this.schedules = this.schedules.filter(
-          (a) => a.title !== resp[0].title
-        );
+      .delete(`${apiUrl}feed/${query}/`, this.headers)
+      .subscribe((data) => {
+        console.log(data);
+        this.schedules = this.schedules.filter((a) => a.title !== title);
         this.updateTable();
       });
   }
 
   ngOnInit(): void {
-    this.http.get('http://127.0.0.1:8000/api/feed/').subscribe((resp: any) => {
-      this.schedules = resp;
+    console.log(localStorage);
 
-      this.updateTable();
-    });
     this.store
       .select(selectAppFeature)
-      .pipe(filter((a) => a.schedules !== null))
+      .pipe()
       .subscribe((data) => {
-        this.schedules.push(data.schedules);
-        this.updateTable();
+        this.http.get(`${apiUrl}feed/`, this.headers).subscribe((resp: any) => {
+          this.schedules = resp;
+
+          this.updateTable();
+        });
       });
   }
 }

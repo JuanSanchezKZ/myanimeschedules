@@ -16,8 +16,10 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { addScheduleAction } from 'src/store/actions/actions';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { malInterface } from 'src/store/interfaces/apiInterface';
+import { apiUrl } from 'src/environments/environment';
+import { interval, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-modal',
@@ -31,6 +33,14 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
   show = false;
   intervalCountdown!: any;
   schedules: any;
+  headers = {
+    headers: new HttpHeaders().set(
+      'Authorization',
+      `Token ${localStorage.getItem('userToken')}`
+    ),
+  };
+  counterTime$!: Subscription;
+  countdownDate!: number;
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -47,9 +57,25 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
     }
   ) {}
 
-  updateNextEpisode(broadcast: any, broadcastTime: any) {
+  updateNextEpisode() {
     // animeDates
 
+    let nowinJapan = this.convertToJapan(new Date());
+    let now = nowinJapan.getTime();
+    let distance = this.countdownDate - now;
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    this.demo = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
+    if (days < 0) {
+      this.countdownDate += 6.048e8;
+    }
+  }
+
+  start(broadcast: any, broadcastTime: any) {
     const animeDateDay = broadcast.day;
     const animeDateMonth = broadcast.month;
     const animeDateYear = broadcast.year;
@@ -61,20 +87,14 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
       `${animeDateMonth} ${animeDateDay}, ${animeDateYear} ${animeBroadcastTime}`
     );
 
-    const countDownDate = dateinJapan.getTime();
+    this.countdownDate = dateinJapan.getTime();
 
-    this.intervalCountdown = setInterval(() => {
-      let nowinJapan = this.convertToJapan(new Date());
-      let now = nowinJapan.getTime();
-      let distance = countDownDate - now;
-      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      let hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      this.demo = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ';
-    }, 1000);
+    return interval(100).pipe(
+      map((a) => {
+        this.updateNextEpisode();
+        return a;
+      })
+    );
   }
 
   convertToJapan(date: any) {
@@ -92,33 +112,34 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
       title: broadcast.title,
       day: broadcast.broadcast.day,
       broadcastTime: broadcast.broadcast.time,
-      synopsis: broadcast.synopsis,
       image: broadcast.images.jpg.image_url,
     };
-    this.http
-      .get(`http://127.0.0.1:8000/api/feed/?search=${broadcast.title}`)
-      .subscribe((data: any) => {
-        console.log(data);
-        if (data.length === 0) {
-          this.http
-            .post('http://127.0.0.1:8000/api/feed/', broadcastBody)
-            .subscribe((resp) => {
-              this.store.dispatch(addScheduleAction(broadcastBody));
-              console.log(resp);
-            });
-        } else {
-          console.log('ya estaba en la lista perro');
-        }
-      });
+
+    this.http.get(`${apiUrl}feed/`, this.headers).subscribe((data: any) => {
+      const dataSome = data.some((a: any) => a.title === broadcast.title);
+      if (dataSome) {
+        console.log('yaestaba en al lista perro');
+      } else {
+        this.http
+          .post(`${apiUrl}feed/`, broadcastBody, this.headers)
+          .subscribe((resp) => {
+            this.store.dispatch(addScheduleAction(broadcastBody));
+            console.log(resp);
+          });
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {}
 
   ngOnDestroy(): void {
-    clearInterval(this.intervalCountdown);
+    this.counterTime$.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.updateNextEpisode(this.data.broadcast, this.data.broadcastTime);
+    this.counterTime$ = this.start(
+      this.data.broadcast,
+      this.data.broadcastTime
+    ).subscribe((data) => {});
   }
 }
