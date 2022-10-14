@@ -3,3 +3,8 @@
   font-weight: 600;
   text-align: center;
 }
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 8px;
+}

@@ -19,7 +19,7 @@ import { addScheduleAction } from 'src/store/actions/actions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { malInterface } from 'src/store/interfaces/apiInterface';
 import { apiUrl } from 'src/environments/environment';
-import { interval, map, Observable, Subscription } from 'rxjs';
+import { interval, map, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-modal',

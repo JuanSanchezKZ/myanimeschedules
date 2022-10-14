@@ -1,3 +1,14 @@
 a {
   color: #fff;
 }
+
+.navbar {
+  background-color: rgb(17, 17, 17);
+  padding: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}

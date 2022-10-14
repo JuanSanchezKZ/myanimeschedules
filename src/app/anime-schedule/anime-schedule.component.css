@@ -5,11 +5,9 @@
 }
 
 table {
+  display: table;
   width: 100%;
   background: transparent;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 img {
@@ -18,13 +16,16 @@ img {
 
 th {
   border: 0.5px solid rgba(0, 0, 0, 0.288);
-  background: #0d1831;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 td {
+  border-right: 2px solid #dadada94;
+  border-left: 2px solid #dadada;
+  box-shadow: 0 0 10px #52555a67;
   width: 14.2%;
-  border: 0.5px solid rgba(0, 0, 0, 0.288);
-  background: #0f172a;
 }
 
 .modal__title,
@@ -39,4 +40,22 @@ td {
 
 .mat-header-cell {
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.card {
+  margin: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.144);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: #0f172a;
+}
+
+th.mat-header-cell:last-of-type,
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type {
+  padding-right: 0px;
 }
