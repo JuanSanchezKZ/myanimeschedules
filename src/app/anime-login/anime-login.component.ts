@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { apiUrl } from 'src/environments/environment';
+import { AuthService } from '../auth.guard';
 
 @Component({
   selector: 'app-anime-login',
@@ -10,7 +11,7 @@ import { apiUrl } from 'src/environments/environment';
   styleUrls: ['./anime-login.component.css'],
 })
 export class AnimeLoginComponent implements OnInit {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   formUser = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -29,7 +30,7 @@ export class AnimeLoginComponent implements OnInit {
         .subscribe({
           next: (response: any) => {
             localStorage.setItem('userToken', response.token);
-            this.router.navigateByUrl('');
+            this.authService.login();
           },
           error: (error) => {
             console.error(error);

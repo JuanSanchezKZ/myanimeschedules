@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth.guard';
 
 @Component({
   selector: 'app-anime-navbar',
@@ -7,13 +8,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./anime-navbar.component.css'],
 })
 export class AnimeNavbarComponent implements OnInit {
-  isLogged = localStorage.getItem('userToken');
-  constructor(private router: Router) {}
+  isLoggedIn$!: Observable<boolean>;
+  constructor(private authService: AuthService) {}
 
   logOut() {
     localStorage.removeItem('userToken');
-    this.router.navigateByUrl('/login');
+    this.authService.logout();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('userToken')) {
+      this.authService.login();
+    } else {
+      this.authService.logout();
+    }
+    
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+  }
 }
