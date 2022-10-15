@@ -13,6 +13,10 @@ mat-form-field {
   border-radius: 8px;
 }
 
+input {
+  color: black;
+}
+
 .container-sm {
   color: white;
   width: 600px;
