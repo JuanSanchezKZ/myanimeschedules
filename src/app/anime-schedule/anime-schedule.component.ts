@@ -1,12 +1,11 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component, OnInit } from '@angular/core';
 
 import { MatTableDataSource } from '@angular/material/table';
 
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app.state';
 import { selectAppFeature } from 'src/store/selectors/selector';
-import { distinct, distinctUntilChanged, filter, skip } from 'rxjs/operators';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from 'src/environments/environment';
 
@@ -16,9 +15,7 @@ import { apiUrl } from 'src/environments/environment';
   styleUrls: ['./anime-schedule.component.css'],
 })
 export class AnimeScheduleComponent implements OnInit {
-  modalRef?: BsModalRef;
   animeMondays: any[] = [];
-  modal: any;
   displayedColumns: string[] = [
     'Mondays',
     'Tuesdays',
@@ -37,14 +34,7 @@ export class AnimeScheduleComponent implements OnInit {
     ),
   };
 
-  constructor(
-    private modalService: BsModalService,
-    private store: Store<AppState>,
-    private http: HttpClient
-  ) {}
-
-  // find anime by id in list of schedule anime
-  // this.schedules.find((x: any) => x.mal_id == i.mal_id);
+  constructor(private store: Store<AppState>, private http: HttpClient) {}
 
   orderScheduleAnime() {
     this.schedules.sort((a: any, b: any) => {
@@ -58,16 +48,10 @@ export class AnimeScheduleComponent implements OnInit {
     this.orderScheduleAnime();
   }
 
-  openModal(template: TemplateRef<any>, schedules: any) {
-    this.modalRef = this.modalService.show(template);
-    this.modal = schedules;
-  }
-
   removeSchedule(query: number, title: string) {
     this.http
       .delete(`${apiUrl}feed/${query}/`, this.headers)
       .subscribe((data) => {
-        console.log(data);
         this.schedules = this.schedules.filter((a) => a.title !== title);
         this.updateTable();
       });

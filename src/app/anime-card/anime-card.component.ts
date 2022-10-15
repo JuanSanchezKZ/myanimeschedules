@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/store/app.state';
+import { selectSearchAnime } from 'src/store/selectors/selector';
+import { JikanService } from '../jikan.service';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -8,9 +12,13 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrls: ['./anime-card.component.css'],
 })
 export class AnimeCardComponent implements OnInit {
-  @Input('data') cardData: any;
+  cardData: any;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private store: Store<AppState>,
+    private api: JikanService
+  ) {}
 
   openDialog(data: any) {
     this.dialog.open(ModalComponent, {
@@ -25,5 +33,23 @@ export class AnimeCardComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  fillCards() {
+    this.api.getSeasonalAnime('2022', 'fall', '1').subscribe((data: any) => {
+      this.cardData = data.data;
+      this.api.getSeasonalAnime('2022', 'fall', '2').subscribe((data: any) => {
+        this.cardData.push(...data.data);
+      });
+    });
+  }
+
+  ngOnInit(): void {
+    this.fillCards();
+    this.store.select(selectSearchAnime).subscribe((data) => {
+      data
+        ? (this.cardData = this.cardData.filter(
+            (s: any) => s.title.toLowerCase().indexOf(data.toLowerCase()) != -1
+          ))
+        : this.fillCards();
+    });
+  }
 }

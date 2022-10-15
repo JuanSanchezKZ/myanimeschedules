@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from '@auth0/auth0-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { AnimeSearcherComponent } from './anime/anime-searcher/anime-searcher.component';
+import { AnimeWrapperComponent } from './anime/anime-wrapper/anime-wrapper.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { AnimeScheduleComponent } from './anime-schedule/anime-schedule.component';
@@ -29,11 +29,13 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { AnimeLoginComponent } from './anime-login/anime-login.component';
 import { AnimeRegisterComponent } from './anime-register/anime-register.component';
 import { AnimeCardComponent } from './anime-card/anime-card.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnimeSearcherComponent,
+    AnimeWrapperComponent,
     AnimeScheduleComponent,
     AnimeNavbarComponent,
     SearchAnimeComponent,
@@ -57,6 +59,8 @@ import { AnimeCardComponent } from './anime-card/anime-card.component';
     MatTableModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatInputModule,
+    MatIconModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(ROOT_REDUCERS),
     StoreDevtoolsModule.instrument({ name: 'TEST' }),

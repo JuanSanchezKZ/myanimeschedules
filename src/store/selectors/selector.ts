@@ -9,3 +9,8 @@ export const selectSchedules = createSelector(
   selectAppFeature,
   (state: scheduleState) => state.schedules
 );
+
+export const selectSearchAnime = createSelector(
+  selectAppFeature,
+  (state: scheduleState) => state.searchInput
+);
