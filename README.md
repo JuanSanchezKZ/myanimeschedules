@@ -7,7 +7,7 @@ La aplicación funciona a través de una API hecha en Python/Django.
 
 Para los estilos de la página se utilizó:
 - Angular Material
-- Boostrap
+- Bootstrap
 
 
 
