@@ -2,10 +2,50 @@ img {
   width: 300px;
 }
 
+mat-form-field {
+  background-color: white;
+  height: 60px;
+  border-radius: 8px;
+}
+
+input {
+  color: black;
+}
+
 .container-sm {
   color: white;
-  background-color: #0f172a;
+  width: 600px;
+  background-color: #111;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-radius: 8px;
+  border-radius: 24px;
   padding: 3rem;
+}
+
+@media (max-width: 600px) {
+  .container-sm {
+    width: 100%;
+  }
+}
+
+.btn {
+  padding: 15px 40px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 8px 16px;
+  transition: 0.3s ease;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.089);
+}
+
+.b-level-1.b-type-2 {
+  color: #fff;
+}
+
+.b-level-1.b-type-2:hover {
+  color: #111;
+  background: #f1f1f1;
 }

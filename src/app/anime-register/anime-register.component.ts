@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { apiUrl } from 'src/environments/environment';
 
 @Component({
@@ -10,12 +11,12 @@ import { apiUrl } from 'src/environments/environment';
 })
 export class AnimeRegisterComponent implements OnInit {
   formUser = new FormGroup({
-    name: new FormControl('', Validators.required),
+    name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     if (this.formUser.valid) {
@@ -29,7 +30,14 @@ export class AnimeRegisterComponent implements OnInit {
           name: name,
           password: password,
         })
-        .subscribe((data) => console.log(data));
+        .subscribe({
+          next: (response: any) => {
+            this.router.navigateByUrl('login');
+          },
+          error: (error) => {
+            console.error(error);
+          },
+        });
     }
   }
 
