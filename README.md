@@ -9,5 +9,7 @@ Para los estilos de la página se utilizó:
 - Angular Material
 - Bootstrap
 
+Live on: https://myanimeschedules.netlify.app/
+
 
 
