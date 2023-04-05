@@ -8,9 +8,8 @@ describe('AnimeLoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AnimeLoginComponent ]
-    })
-    .compileComponents();
+      declarations: [AnimeLoginComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AnimeLoginComponent);
     component = fixture.componentInstance;

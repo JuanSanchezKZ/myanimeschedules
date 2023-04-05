@@ -34,11 +34,13 @@ export class AnimeCardComponent implements OnInit {
   }
 
   fillCards() {
-    this.api.getSeasonalAnime('2022', 'fall', '1').subscribe((data: any) => {
+    this.api.getSeasonalAnime('2023', 'spring', '1').subscribe((data: any) => {
       this.cardData = data.data;
-      this.api.getSeasonalAnime('2022', 'fall', '2').subscribe((data: any) => {
-        this.cardData.push(...data.data);
-      });
+      this.api
+        .getSeasonalAnime('2023', 'spring', '2')
+        .subscribe((data: any) => {
+          this.cardData.push(...data.data);
+        });
     });
   }
 

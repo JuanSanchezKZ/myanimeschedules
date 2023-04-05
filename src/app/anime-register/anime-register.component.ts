@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { apiUrl } from 'src/environments/environment';
+import { apiUrl } from 'src/environments/constants';
 
 @Component({
   selector: 'app-anime-register',
@@ -25,7 +25,7 @@ export class AnimeRegisterComponent implements OnInit {
       const password = this.formUser.value.password;
 
       this.http
-        .post(`${apiUrl}profile/`, {
+        .post(`${apiUrl}/api/profile/`, {
           email: email,
           name: name,
           password: password,

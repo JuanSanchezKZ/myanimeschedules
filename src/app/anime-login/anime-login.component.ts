@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { apiUrl } from 'src/environments/environment';
+import { apiUrl } from 'src/environments/constants';
 import { AuthService } from '../auth.guard';
 
 @Component({
@@ -23,7 +22,7 @@ export class AnimeLoginComponent implements OnInit {
     const password = this.formUser.value.password;
     if (this.formUser.valid) {
       this.http
-        .post(`${apiUrl}login/`, {
+        .post(`${apiUrl}/api/login/`, {
           username: email,
           password: password,
         })

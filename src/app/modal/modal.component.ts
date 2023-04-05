@@ -18,8 +18,9 @@ import {
 import { addScheduleAction } from 'src/store/actions/actions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { malInterface } from 'src/store/interfaces/apiInterface';
-import { apiUrl } from 'src/environments/environment';
+
 import { interval, map, Subscription } from 'rxjs';
+import { apiUrl } from 'src/environments/constants';
 
 @Component({
   selector: 'app-modal',
@@ -115,19 +116,21 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
       image: broadcast.images.jpg.image_url,
     };
 
-    this.http.get(`${apiUrl}feed/`, this.headers).subscribe((data: any) => {
-      const dataSome = data.some((a: any) => a.title === broadcast.title);
-      if (dataSome) {
-        console.log('yaestaba en al lista perro');
-      } else {
-        this.http
-          .post(`${apiUrl}feed/`, broadcastBody, this.headers)
-          .subscribe((resp) => {
-            this.store.dispatch(addScheduleAction(broadcastBody));
-            console.log(resp);
-          });
-      }
-    });
+    this.http
+      .get(`${apiUrl}/api/feed/`, this.headers)
+      .subscribe((data: any) => {
+        const dataSome = data.some((a: any) => a.title === broadcast.title);
+        if (dataSome) {
+          console.log('yaestaba en al lista perro');
+        } else {
+          this.http
+            .post(`${apiUrl}/api/feed/`, broadcastBody, this.headers)
+            .subscribe((resp) => {
+              this.store.dispatch(addScheduleAction(broadcastBody));
+              console.log(resp);
+            });
+        }
+      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {}

@@ -7,7 +7,7 @@ import { AppState } from 'src/store/app.state';
 import { selectAppFeature } from 'src/store/selectors/selector';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { apiUrl } from 'src/environments/environment';
+import { apiUrl } from 'src/environments/constants';
 
 @Component({
   selector: 'app-anime-schedule',
@@ -50,7 +50,7 @@ export class AnimeScheduleComponent implements OnInit {
 
   removeSchedule(query: number, title: string) {
     this.http
-      .delete(`${apiUrl}feed/${query}/`, this.headers)
+      .delete(`${apiUrl}/api/feed/${query}/`, this.headers)
       .subscribe((data) => {
         this.schedules = this.schedules.filter((a) => a.title !== title);
         this.updateTable();
@@ -64,11 +64,13 @@ export class AnimeScheduleComponent implements OnInit {
       .select(selectAppFeature)
       .pipe()
       .subscribe((data) => {
-        this.http.get(`${apiUrl}feed/`, this.headers).subscribe((resp: any) => {
-          this.schedules = resp;
+        this.http
+          .get(`${apiUrl}/api/feed/`, this.headers)
+          .subscribe((resp: any) => {
+            this.schedules = resp;
 
-          this.updateTable();
-        });
+            this.updateTable();
+          });
       });
   }
 }
