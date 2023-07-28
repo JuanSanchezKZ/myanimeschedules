@@ -1,0 +1,23 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    gap:1rem;
+    color: rgb(209, 207, 207);
+    font-weight: 300;
+    margin-top:1rem;
+}
+
+.img img {
+    width:100%;
+    border: 4px solid rgba(0, 0, 0, 0.315);
+    border-radius: 18px;
+}
+
+h2 {
+    font-size:18px;
+    color: rgb(211, 210, 210);
+    font-weight: 600;
+}

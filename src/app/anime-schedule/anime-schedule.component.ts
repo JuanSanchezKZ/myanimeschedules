@@ -16,7 +16,6 @@ import { fromEvent } from 'rxjs';
   styleUrls: ['./anime-schedule.component.css'],
 })
 export class AnimeScheduleComponent implements OnInit, AfterViewInit {
-  animeMondays: any[] = [];
   tableColumns: string[] = ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays','Sundays'];
   schedules: any[] = [];
   headers = {
@@ -25,10 +24,6 @@ export class AnimeScheduleComponent implements OnInit, AfterViewInit {
       `Token ${localStorage.getItem('userToken')}`
     ),
   };
-  arrTime: any[] = []
-  @ViewChild('accordion', { static: false }) targetElement!: ElementRef;
- 
-
   constructor(private store: Store<AppState>, private http: HttpClient) {}
 
   orderScheduleAnime() {
@@ -36,11 +31,6 @@ export class AnimeScheduleComponent implements OnInit, AfterViewInit {
       return a.broadcastTime > b.broadcastTime ? 1 : -1;
     });
   }
-
-  
-
-  
-
   updateTable() {
     this.orderScheduleAnime();
   }
@@ -69,18 +59,9 @@ ngAfterViewInit(): void {
             this.schedules = resp;
 
             this.updateTable();
-            console.log(this.schedules)
+          
           });
       });
-
-      for (let i = 0; i <= 24; i++) {
-        if (i <= 12) {
-          this.arrTime.push(`${i}:00 AM`)
-        } else {
-          this.arrTime.push(`${i - 12}:00 PM`)
-        }
-        
-      }
 
    
   }

@@ -1,9 +1,9 @@
 <cdk-accordion class="example-accordion">
   <ng-container *ngFor="let outerItem of tableColumns; let index = index">
     <!-- Outer Item Content Here -->
-    <tr>
-      <th>{{ outerItem }}</th>
-    </tr>
+    <div class="broadcastDay">
+      <p>{{ outerItem }}</p>
+    </div>
     <cdk-accordion-item
       #accordionItem="cdkAccordionItem"
       class="example-accordion-item"
@@ -29,18 +29,18 @@
         [attr.aria-labelledby]="'accordion-header-' + index"
       >
         <ng-container *ngFor="let innerItem of schedules; let index = index">
-          <tr>
-            <td *ngIf="innerItem.day === outerItem">
-              <div class="card">
-                <p>{{ innerItem.title }}</p>
-                <p>{{ innerItem.broadcastTime }}</p>
-                <img [src]="innerItem.image" alt="" />
-                <button (click)="removeSchedule(innerItem.id, innerItem.title)">
-                  Remove
-                </button>
-              </div>
-            </td>
-          </tr>
+          <div *ngIf="innerItem.day === outerItem">
+            <app-anime-schedule-card
+              class="mt-3"
+              [schedule]="innerItem"
+            ></app-anime-schedule-card>
+            <button
+              class="btn"
+              (click)="removeSchedule(innerItem.id, innerItem.title)"
+            >
+              Remove
+            </button>
+          </div>
         </ng-container>
       </div>
     </cdk-accordion-item>
