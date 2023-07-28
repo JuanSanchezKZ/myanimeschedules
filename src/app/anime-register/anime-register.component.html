@@ -1,33 +1,32 @@
-<div class="container-sm mt-5">
-  <div class="row">
-    <div class="col-sm-6 mt-3 d-flex justify-content-center"></div>
-    <div class="col-sm-6 mt-3 d-flex justify-content-center">
-      <div class="row">
-        <form [formGroup]="formUser" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Name</mat-label>
-              <input type="name" formControlName="name" matInput />
-            </mat-form-field>
-          </div>
-          <div class="mb-3">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>E-Mail</mat-label>
-              <input type="email" matInput formControlName="email" />
-            </mat-form-field>
-          </div>
-          <div class="mb-3">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Password</mat-label>
-              <input type="password" formControlName="password" matInput />
-            </mat-form-field>
-          </div>
-
-          <button type="submit" class="btn btn-round b-level-1 b-type-2">
-            Register
-          </button>
-        </form>
-      </div>
+<div class="container-sm mt-3">
+  <form [formGroup]="formUser" (ngSubmit)="onSubmit()">
+    <label>Name</label>
+    <input type="name" formControlName="name" />
+    <div
+      class="error"
+      *ngIf="formUser.get('name')?.touched && formUser.get('name')?.invalid"
+    >
+      Name is required.
     </div>
-  </div>
+    <label>E-Mail</label>
+    <input type="email" formControlName="email" />
+    <div
+      class="error"
+      *ngIf="formUser.get('email')?.touched && formUser.get('email')?.invalid"
+    >
+      E-mail is required.
+    </div>
+    <label>Password</label>
+    <input type="password" formControlName="password" />
+    <div
+      class="error"
+      *ngIf="
+        formUser.get('password')?.touched && formUser.get('password')?.invalid
+      "
+    >
+      Password is required.
+    </div>
+    <button class="btn" type="submit" class="btn">Register</button>
+  </form>
+  <div class="error mb-3" *ngIf="error">{{ error }}</div>
 </div>

@@ -7,7 +7,7 @@ import { onSearchAnime } from 'src/store/actions/actions';
 @Component({
   selector: 'app-search-anime',
   templateUrl: './search-anime.component.html',
-  styleUrls: ['./search-anime.component.css'],
+  styleUrls: ['./search-anime.component.scss'],
 })
 export class SearchAnimeComponent implements OnInit {
   @ViewChild('searchInput', { static: true })

@@ -15,6 +15,7 @@ export class AnimeRegisterComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+error: string = ''
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -35,7 +36,10 @@ export class AnimeRegisterComponent implements OnInit {
             this.router.navigateByUrl('login');
           },
           error: (error) => {
-            console.error(error);
+            
+              this.error = error.error.email[0]
+              
+           
           },
         });
     }

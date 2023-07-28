@@ -7,7 +7,7 @@ import { AuthService } from '../auth.guard';
 @Component({
   selector: 'app-anime-login',
   templateUrl: './anime-login.component.html',
-  styleUrls: ['./anime-login.component.css'],
+  styleUrls: ['./anime-login.component.scss'],
 })
 export class AnimeLoginComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) {}
@@ -16,6 +16,7 @@ export class AnimeLoginComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+  error: string = ''
 
   onSubmit() {
     const email = this.formUser.value.email;
@@ -32,7 +33,8 @@ export class AnimeLoginComponent implements OnInit {
             this.authService.login();
           },
           error: (error) => {
-            console.error(error);
+            this.error = error.error.non_field_errors[0]
+            console.log(error)
           },
         });
     }

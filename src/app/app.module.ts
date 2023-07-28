@@ -29,6 +29,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { AnimeScheduleCardComponent } from './anime-schedule/anime-schedule-card/anime-schedule-card.component';
 
 
 
@@ -43,6 +44,8 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     AnimeLoginComponent,
     AnimeRegisterComponent,
     AnimeCardComponent,
+    AnimeScheduleCardComponent
+
   ],
   imports: [
     BrowserModule,

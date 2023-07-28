@@ -1,16 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap');
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html {
-  font-family: "Lato", sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh
 }
 
 body {
-  font-family: "Lato", sans-serif;
-  background: #18181b;
+  background:linear-gradient(rgba(0, 0, 0, 0.90), rgba(0, 0, 0, 0.934)),  url(./assets/images/formBackground.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 100vh
 }
 
 .mat-dialog-container {
