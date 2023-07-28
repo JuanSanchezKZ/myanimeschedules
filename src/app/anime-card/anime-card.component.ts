@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app.state';
 import { selectSearchAnime } from 'src/store/selectors/selector';
 import { JikanService } from '../jikan.service';
 import { ModalComponent } from '../modal/modal.component';
+import { Overlay } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-anime-card',
@@ -17,10 +18,12 @@ export class AnimeCardComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private store: Store<AppState>,
-    private api: JikanService
+    private api: JikanService,
+    private overlay: Overlay
   ) {}
 
   openDialog(data: any) {
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
     this.dialog.open(ModalComponent, {
       data: {
         title: data.title,
@@ -30,14 +33,16 @@ export class AnimeCardComponent implements OnInit {
         broadcastTime: data.broadcast.time,
         storage: data,
       },
+      autoFocus: false,
+      scrollStrategy,
     });
   }
 
   fillCards() {
-    this.api.getSeasonalAnime('2023', 'spring', '1').subscribe((data: any) => {
+    this.api.getSeasonalAnime('1').subscribe((data: any) => {
       this.cardData = data.data;
       this.api
-        .getSeasonalAnime('2023', 'spring', '2')
+        .getSeasonalAnime('2')
         .subscribe((data: any) => {
           this.cardData.push(...data.data);
         });

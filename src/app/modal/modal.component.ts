@@ -10,11 +10,7 @@ import {
 import { AppState } from 'src/store/app.state';
 import { Store } from '@ngrx/store';
 
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { addScheduleAction } from 'src/store/actions/actions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { malInterface } from 'src/store/interfaces/apiInterface';
@@ -31,7 +27,7 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
   @Input('modal') rowsModal: any;
 
   demo: any;
-  show = false;
+  showMore = false;
   intervalCountdown!: any;
   schedules: any;
   headers = {
@@ -42,7 +38,7 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
   };
   counterTime$!: Subscription;
   countdownDate!: number;
-
+ 
   constructor(
     public dialogRef: MatDialogRef<any>,
     private store: Store<AppState>,

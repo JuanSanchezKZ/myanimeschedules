@@ -1,17 +1,17 @@
 * {
   color: white;
+  margin:0;
+  padding:0;
+  
 }
 .p_title {
   font-weight: 600;
-  font-size: 1.5rem;
   text-align: center;
 }
 
 .modal__style {
   background-color: #0f172a;
-  width: inherit;
   max-height: 100%;
-  padding: 1rem;
 }
 
 .btn {
@@ -38,5 +38,9 @@
 }
 
 img {
-  max-width: 100%;
+  width: 75%;
+}
+
+span {
+  width:300px;
 }

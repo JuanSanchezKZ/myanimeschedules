@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app.state';
@@ -8,24 +8,16 @@ import { selectAppFeature } from 'src/store/selectors/selector';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from 'src/environments/constants';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-anime-schedule',
   templateUrl: './anime-schedule.component.html',
   styleUrls: ['./anime-schedule.component.css'],
 })
-export class AnimeScheduleComponent implements OnInit {
+export class AnimeScheduleComponent implements OnInit, AfterViewInit {
   animeMondays: any[] = [];
-  displayedColumns: string[] = [
-    'Mondays',
-    'Tuesdays',
-    'Wednesdays',
-    'Thursdays',
-    'Fridays',
-    'Saturdays',
-    'Sundays',
-  ];
-  dataSource = new MatTableDataSource<any>();
+  tableColumns: string[] = ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays','Sundays'];
   schedules: any[] = [];
   headers = {
     headers: new HttpHeaders().set(
@@ -33,6 +25,9 @@ export class AnimeScheduleComponent implements OnInit {
       `Token ${localStorage.getItem('userToken')}`
     ),
   };
+  arrTime: any[] = []
+  @ViewChild('accordion', { static: false }) targetElement!: ElementRef;
+ 
 
   constructor(private store: Store<AppState>, private http: HttpClient) {}
 
@@ -42,9 +37,11 @@ export class AnimeScheduleComponent implements OnInit {
     });
   }
 
-  updateTable() {
-    this.dataSource.data = this.schedules;
+  
 
+  
+
+  updateTable() {
     this.orderScheduleAnime();
   }
 
@@ -57,9 +54,11 @@ export class AnimeScheduleComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-    console.log(localStorage);
+ngAfterViewInit(): void {
+ 
+}
 
+  ngOnInit(): void {
     this.store
       .select(selectAppFeature)
       .pipe()
@@ -70,7 +69,19 @@ export class AnimeScheduleComponent implements OnInit {
             this.schedules = resp;
 
             this.updateTable();
+            console.log(this.schedules)
           });
       });
+
+      for (let i = 0; i <= 24; i++) {
+        if (i <= 12) {
+          this.arrTime.push(`${i}:00 AM`)
+        } else {
+          this.arrTime.push(`${i - 12}:00 PM`)
+        }
+        
+      }
+
+   
   }
 }

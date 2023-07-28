@@ -12,12 +12,10 @@ export class JikanService {
   }
 
   getSeasonalAnime(
-    year: string,
-    season: string,
     queryPage: string
   ): Observable<any> {
     return this.http.get<any>(
-      `https://api.jikan.moe/v4/seasons/${year}/${season}?page=${queryPage}&limit=25`
+      `https://api.jikan.moe/v4/seasons/now?page=${queryPage}&limit=25`
     );
   }
 
