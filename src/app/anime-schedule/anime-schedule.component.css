@@ -20,7 +20,8 @@
   justify-content: space-between;
 }
 
-.example-accordion-item-description {
+.example-accordion-item-description, .example-accordion-item-amount {
+  
   font-size: 0.85em;
   color: #c0bfbf;
 }
