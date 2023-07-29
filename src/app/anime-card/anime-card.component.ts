@@ -6,6 +6,7 @@ import { selectSearchAnime } from 'src/store/selectors/selector';
 import { JikanService } from '../jikan.service';
 import { ModalComponent } from '../modal/modal.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { concat, debounceTime, delay, distinctUntilChanged, forkJoin, take } from 'rxjs';
 
 @Component({
   selector: 'app-anime-card',
@@ -13,7 +14,7 @@ import { Overlay } from '@angular/cdk/overlay';
   styleUrls: ['./anime-card.component.css'],
 })
 export class AnimeCardComponent implements OnInit {
-  cardData: any;
+  cardData: any[] = []
 
   constructor(
     public dialog: MatDialog,
@@ -39,24 +40,34 @@ export class AnimeCardComponent implements OnInit {
   }
 
   fillCards() {
-    this.api.getSeasonalAnime('1').subscribe((data: any) => {
-      this.cardData = data.data;
-      this.api
-        .getSeasonalAnime('2')
-        .subscribe((data: any) => {
-          this.cardData.push(...data.data);
-        });
-    });
+
+  const getSeasonalAnimeFirstPage = this.api.getSeasonalAnime('1')
+  const getSeasonalAnimeSecondPage = this.api.getSeasonalAnime('2')
+   
+ 
+  
+  concat(getSeasonalAnimeFirstPage, getSeasonalAnimeSecondPage).subscribe((data) => {
+    
+    this.cardData.push(...data.data)
+    this.cardData = this.cardData.filter((value, index, self) =>
+    index === self.findIndex((t) => (
+      t.title === value.title 
+    ))
+  )} )
+
   }
 
   ngOnInit(): void {
-    this.fillCards();
+    
     this.store.select(selectSearchAnime).subscribe((data) => {
+      
       data
         ? (this.cardData = this.cardData.filter(
             (s: any) => s.title.toLowerCase().indexOf(data.toLowerCase()) != -1
           ))
         : this.fillCards();
     });
+    
+
   }
 }

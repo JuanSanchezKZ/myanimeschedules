@@ -11,6 +11,6 @@ import { Component, Input, OnInit } from "@angular/core";
   @Input('schedule') schedule: any
 
     ngOnInit(): void {
-        console.log(this.schedule)
+        
     }
   }

@@ -38,7 +38,8 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
   };
   counterTime$!: Subscription;
   countdownDate!: number;
- 
+  alreadyOnTheListString: string = ''
+  isOnTheList: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<any>,
     private store: Store<AppState>,
@@ -86,7 +87,7 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
 
     this.countdownDate = dateinJapan.getTime();
 
-    return interval(100).pipe(
+    return interval(10).pipe(
       map((a) => {
         this.updateNextEpisode();
         return a;
@@ -117,8 +118,11 @@ export class ModalComponent implements OnDestroy, OnChanges, OnInit {
       .subscribe((data: any) => {
         const dataSome = data.some((a: any) => a.title === broadcast.title);
         if (dataSome) {
-          console.log('yaestaba en al lista perro');
+          this.alreadyOnTheListString = 'Already on your schedule'
+          this.isOnTheList = false
         } else {
+          this.alreadyOnTheListString = 'Added to your schedule'
+          this.isOnTheList = true
           this.http
             .post(`${apiUrl}/api/feed/`, broadcastBody, this.headers)
             .subscribe((resp) => {

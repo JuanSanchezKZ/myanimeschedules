@@ -1,25 +1,20 @@
 <div class="container">
   <div mat-dialog-content class="modal__style">
     <h1 class="p_title">{{ data.title }}</h1>
-    <div class="row mt-3 justify-content-center">
-      <div class="col-sm-6">
-        <img [src]="data.image" alt="" />
-      </div>
 
-      <div class="col-sm-6">
-        <div class="container_synopsis mt-3">
-          {{ data.synopsis }}
-        </div>
-        <p>Next episode in: {{ demo }}</p>
-      </div>
-      <span>
-        <button
-          class="btn btn-round b-level-1 b-type-2 mt-3"
-          (click)="passToSchedule(data.storage)"
-        >
-          Add to Schedule
-        </button>
-      </span>
+    <img [src]="data.image" alt="" />
+
+    <p>Next episode in: {{ demo }}</p>
+
+    <div
+      [ngStyle]="{ color: isOnTheList ? 'white' : 'red' }"
+      *ngIf="alreadyOnTheListString"
+    >
+      {{ alreadyOnTheListString }}
     </div>
+
+    <button class="btn" (click)="passToSchedule(data.storage)">
+      Add to Schedule
+    </button>
   </div>
 </div>
