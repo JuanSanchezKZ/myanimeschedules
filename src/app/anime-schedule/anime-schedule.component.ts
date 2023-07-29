@@ -1,14 +1,10 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
-
+import { AfterViewInit, Component,  OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/store/app.state';
 import { selectAppFeature } from 'src/store/selectors/selector';
-
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiUrl } from 'src/environments/constants';
-import { fromEvent } from 'rxjs';
+
 
 @Component({
   selector: 'app-anime-schedule',
@@ -33,6 +29,12 @@ export class AnimeScheduleComponent implements OnInit, AfterViewInit {
   }
   updateTable() {
     this.orderScheduleAnime();
+  }
+
+  animesInEachDay(weekDay: string) {
+   const animesinEachDay = this.schedules.filter((w) => w.day === weekDay)
+   
+   return animesinEachDay.length
   }
 
   removeSchedule(query: number, title: string) {

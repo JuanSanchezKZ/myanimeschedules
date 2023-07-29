@@ -20,6 +20,18 @@
         <span class="example-accordion-item-description">
           Click to {{ accordionItem.expanded ? "close" : "open" }}
         </span>
+
+        <div class="example-accordion-item-amount">
+          {{
+            animesInEachDay(outerItem) !== 0
+              ? "There are" +
+                " " +
+                animesInEachDay(outerItem) +
+                " " +
+                "animes on this day."
+              : ""
+          }}
+        </div>
       </div>
       <div
         class="example-accordion-item-body"
@@ -31,7 +43,6 @@
         <ng-container *ngFor="let innerItem of schedules; let index = index">
           <div *ngIf="innerItem.day === outerItem">
             <app-anime-schedule-card
-              class="mt-3"
               [schedule]="innerItem"
             ></app-anime-schedule-card>
             <button
